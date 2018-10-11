@@ -37,7 +37,7 @@ class View extends Component {
     // })
     let list = this.props.students.map((student, i) => {
       return (
-        <div><h4>index #{i}</h4>
+        <div key={student.studentNumber}><h4>index #{i+1}</h4>
           <p>Name: {student.name},
           studentNumber: {student.studentNumber},
           address: {student.address},
@@ -62,7 +62,7 @@ class View extends Component {
           <br />
           <input defaultValue={this.props.current.address} ref={this.ref3} type="text" placeholder="Address" name="address" />
           <br />
-          <input defaultValue={this.props.current.phoneNumber} ref={this.ref4} type="number" placeholder="Phone Number" name="phoneNumber" />
+          <input defaultValue={this.props.current.phoneNumber} ref={this.ref4} type="tel" placeholder="Phone Number" name="phoneNumber" />
           <br />
           <input defaultValue={this.props.current.GPA} ref={this.ref5} type="number" placeholder="GPA" name="GPA" />
           <br />
@@ -72,7 +72,7 @@ class View extends Component {
           <input type="submit" onClick={this.passStudent} />
         </form>
         <div name="list">
-        <h3>Students</h3>
+          <h3>Students</h3>
           {list}
         </div>
       </div>
