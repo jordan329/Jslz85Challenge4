@@ -12,10 +12,10 @@ class View extends Component {
     this.ref7 = React.createRef();
     this.state = {}
   }
-  changeStudent = e => {
+  remove = e => {
     // e.preventDefault()
     e.persist()
-    this.props.changeStudent({ currentObjId: e._targetInst.key })
+    this.props.remove({ currentObjId: e._targetInst.key })
   }
   passStudent = e => {
     e.preventDefault();
@@ -35,20 +35,23 @@ class View extends Component {
     //     <button key={student.studentNumber} onClick={this.changeStudent} name={student.id}>{student.name}</button>
     //   );
     // })
-    let list = this.props.students.map((student, i) => {
-      return (
-        <div key={student.studentNumber}><h4>index #{i+1}</h4>
-          <p>Name: {student.name},
+    var list = "here's where the list of students is displayed"
+    if (this.props.students !== undefined) {
+      list = this.props.students.map((student, i) => {
+        return (
+          <div key={student.studentNumber}><h4>index #{i + 1}</h4>
+            <p>Name: {student.name},
           studentNumber: {student.studentNumber},
           address: {student.address},
           phoneNumber: {student.phoneNumber},
           GPA: {student.GPA},
           academicPlan: {student.academicPlan},
           level: {student.level}</p>
-          <button key={student.studentNumber} onClick={this.changeStudent} name={student.id}>Remove {student.name}</button>
+            <button key={student.studentNumber} onClick={this.remove} name={student.id}>Remove {student.name}</button>
 
-        </div>);
-    })
+          </div>);
+      })
+    }
     return (
       <div className="App">
         {/* <div name="remove">
@@ -56,19 +59,19 @@ class View extends Component {
           {buttons}
         </div> */}
         <form>
-          <input defaultValue={this.props.current.name} ref={this.ref1} type="text" placeholder="Name" name="name" />
+          <input ref={this.ref1} type="text" placeholder="Name" name="name" />
           <br />
-          <input defaultValue={this.props.current.studentNumber} ref={this.ref2} type="number" placeholder="Student Number" name="studentNumber" />
+          <input ref={this.ref2} type="number" placeholder="Student Number" name="studentNumber" />
           <br />
-          <input defaultValue={this.props.current.address} ref={this.ref3} type="text" placeholder="Address" name="address" />
+          <input ref={this.ref3} type="text" placeholder="Address" name="address" />
           <br />
-          <input defaultValue={this.props.current.phoneNumber} ref={this.ref4} type="tel" placeholder="Phone Number" name="phoneNumber" />
+          <input ref={this.ref4} type="tel" placeholder="Phone Number" name="phoneNumber" />
           <br />
-          <input defaultValue={this.props.current.GPA} ref={this.ref5} type="number" placeholder="GPA" name="GPA" />
+          <input ref={this.ref5} type="number" placeholder="GPA" name="GPA" />
           <br />
-          <input defaultValue={this.props.current.academicPlan} ref={this.ref6} type="text" placeholder="Academic Plan" name="academicPlan" />
+          <input ref={this.ref6} type="text" placeholder="Academic Plan" name="academicPlan" />
           <br />
-          <input defaultValue={this.props.current.level} ref={this.ref7} type="text" placeholder="Level" name="level" />
+          <input ref={this.ref7} type="text" placeholder="Level" name="level" />
           <input type="submit" onClick={this.passStudent} />
         </form>
         <div name="list">

@@ -6,15 +6,7 @@ class Controller extends Component {
   state = {
     fields: {
       currentObjId: "",
-      currentObj: {
-        name: "s1",
-        studentNumber: "234",
-        address: "s3",
-        phoneNumber: "314-555-5555",
-        GPA: "4.0",
-        academicPlan: "s6",
-        level: "s7",
-      },
+      
       students:
         [
           {
@@ -29,18 +21,17 @@ class Controller extends Component {
         ],
     }
   }
-  changeStudent = updatedValue => {
+  remove = updatedValue => {
     var i = 0;
     var array = [];
     array = this.state.fields.students;
     for (i = 0; i < this.state.fields.students.length; i++) {
       if (updatedValue.currentObjId === array[i].studentNumber) {
-        console.log(array[i])
+        array.splice(i,1)
         this.setState({
           fields: {
             ...this.state.fields,
-            ...updatedValue,
-            currentObj: array[i]
+            students: array
           }
         })
       }
@@ -102,7 +93,7 @@ class Controller extends Component {
   render() {
     return (
       <div className="App">
-        <View current={this.state.fields.currentObj} changeStudent={this.changeStudent} passStudent={this.passStudent} students={this.state.fields.students} />
+        <View current={this.state.fields.currentObj} remove={this.remove} passStudent={this.passStudent} students={this.state.fields.students} />
         <p>
           {JSON.stringify(this.state.fields, null, 2)}
           <br />
