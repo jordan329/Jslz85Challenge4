@@ -13,7 +13,6 @@ class View extends Component {
     this.state = {}
   }
   remove = e => {
-    // e.preventDefault()
     e.persist()
     this.props.remove({ currentObjId: e._targetInst.key })
   }
@@ -30,25 +29,21 @@ class View extends Component {
     })
   }
   render() {
-    // let buttons = this.props.students.map((student, i) => {
-    //   return (
-    //     <button key={student.studentNumber} onClick={this.changeStudent} name={student.id}>{student.name}</button>
-    //   );
-    // })
     var list = "here's where the list of students is displayed"
     if (this.props.students !== undefined) {
       list = this.props.students.map((student, i) => {
         return (
           <div key={student.studentNumber}><h4>index #{i + 1}</h4>
-            <p>Name: {student.name},
-          studentNumber: {student.studentNumber},
-          address: {student.address},
-          phoneNumber: {student.phoneNumber},
-          GPA: {student.GPA},
-          academicPlan: {student.academicPlan},
-          level: {student.level}</p>
-            <button key={student.studentNumber} onClick={this.remove} name={student.id}>Remove {student.name}</button>
-
+            <p>
+              Name: {student.name},
+              studentNumber: {student.studentNumber},
+              address: {student.address},
+              phoneNumber: {student.phoneNumber},
+              GPA: {student.GPA},
+              academicPlan: {student.academicPlan},
+              level: {student.level}
+            </p>
+            <button key={student.studentNumber} onClick={this.remove} name={student.id}>Remove {student.name}</button><input label="active" type="checkbox" ></input>
           </div>);
       })
     }
@@ -59,19 +54,33 @@ class View extends Component {
           {buttons}
         </div> */}
         <form>
+          <label htmlFor="name">Name</label>
+          <br />
+
           <input ref={this.ref1} type="text" placeholder="Name" name="name" />
+          <br />
+          <label htmlFor="name">Student Number</label>
           <br />
           <input ref={this.ref2} type="number" placeholder="Student Number" name="studentNumber" />
           <br />
+          <label htmlFor="name">Address</label>
+          <br />
           <input ref={this.ref3} type="text" placeholder="Address" name="address" />
+          <br />
+          <label htmlFor="name">Phone Number</label>
           <br />
           <input ref={this.ref4} type="tel" placeholder="Phone Number" name="phoneNumber" />
           <br />
+          <label htmlFor="name">GPA</label>
+          <br />
           <input ref={this.ref5} type="number" placeholder="GPA" name="GPA" />
+          <br />
+          <label htmlFor="name">Academic Plan</label>
           <br />
           <input ref={this.ref6} type="text" placeholder="Academic Plan" name="academicPlan" />
           <br />
-          <input ref={this.ref7} type="text" placeholder="Level" name="level" />
+          <label htmlFor="name">Name</label>          <br />
+          <input ref={this.ref7} type="text" label="Level" placeholder="Level" name="level" />
           <input type="submit" onClick={this.passStudent} />
         </form>
         <div name="list">

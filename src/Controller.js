@@ -2,24 +2,17 @@ import React, { Component } from 'react';
 import View from './View';
 
 class Controller extends Component {
+  constructor(props) {
+    super(props);
+    var values = localStorage.getItem('values');
 
-  state = {
-    fields: {
-      currentObjId: "",
-      
-      students:
-        [
-          {
-            name: "s1",
-            studentNumber: "234",
-            address: "s3",
-            phoneNumber: "314-555-5555",
-            GPA: "4.0",
-            academicPlan: "s6",
-            level: "s7",
-          }
-        ],
+    this.state = {
+      fields: {
+        students:
+          values !== undefined ? JSON.parse(values) : [],
+      }
     }
+
   }
   remove = updatedValue => {
     var i = 0;
@@ -27,34 +20,20 @@ class Controller extends Component {
     array = this.state.fields.students;
     for (i = 0; i < this.state.fields.students.length; i++) {
       if (updatedValue.currentObjId === array[i].studentNumber) {
-        array.splice(i,1)
+        array.splice(i, 1)
         this.setState({
           fields: {
             ...this.state.fields,
             students: array
           }
-        })
+        }, this.replaceLocal())
       }
     }
-    // this.setState({
-    //   fields: {
-    //     ...this.state.fields,
-    //     ...updatedValue,
-    //   }
-    // });
   }
-  // componentWillMount() {
-  //   var values = localStorage.getItem(this.state);
-  //   this.setState({ values: JSON.parse(values) })
-  // }
-  onChange = updatedValue => {
-    this.setState({
-      fields: {
-        ...this.state.fields,
-        ...updatedValue
-      }
-    });
-  };
+
+  replaceLocal = () => {
+    localStorage.setItem("values", JSON.stringify(this.state.fields.students))
+  }
   passStudent = updatedValue => {
     var flag = false;
     var i;
@@ -69,7 +48,7 @@ class Controller extends Component {
             ...this.state.fields,
             students: array
           }
-        })
+        }, this.replaceLocal())
       }
     }
     if (!flag) {
@@ -78,18 +57,10 @@ class Controller extends Component {
           ...this.state.fields,
           students: array.concat(updatedValue)
         }
-      });
+      }, this.replaceLocal()
+      );
     }
-    // localStorage.setItem("values", JSON.stringify(this.state))
   }
-  onClick = updatedValue => {
-    this.setState({
-      fields: {
-        ...this.state.fields,
-        ...updatedValue
-      }
-    });
-  };
   render() {
     return (
       <div className="App">
