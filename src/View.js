@@ -79,8 +79,8 @@ class View extends Component {
           <br />
           <input ref={this.ref6} type="text" placeholder="Academic Plan" name="academicPlan" />
           <br />
-          <label htmlFor="name">Name</label>          <br />
-          <input ref={this.ref7} type="text" label="Level" placeholder="Level" name="level" />
+          <label htmlFor="name">Level</label>          <br />
+          <input ref={this.ref7} type="text" placeholder="Level" name="level" />
           <input type="submit" onClick={this.passStudent} />
         </form>
         <div name="list">
